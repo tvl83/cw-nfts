@@ -3,6 +3,9 @@ use cosmwasm_std::Binary;
 use cw_utils::Expiration;
 
 #[cw_serde]
+pub struct MigrateMsg {}
+
+#[cw_serde]
 pub enum Cw721ExecuteMsg {
     /// Transfer is a base message to move a token to another account without triggering actions
     TransferNft { recipient: String, token_id: String },

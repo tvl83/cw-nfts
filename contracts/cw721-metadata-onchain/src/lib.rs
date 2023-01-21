@@ -1,10 +1,11 @@
 use cosmwasm_schema::cw_serde;
 use cosmwasm_std::Empty;
+use cw721_base::msg::MigrateMsg;
 use cw2::set_contract_version;
 pub use cw721_base::{ContractError, InstantiateMsg, MintMsg, MinterResponse};
 
 // Version info for migration
-const CONTRACT_NAME: &str = "crates.io:cw721-metadata-onchain";
+const CONTRACT_NAME: &str = "crates.io:cw721-metadata-onchain1";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cw_serde]
@@ -70,6 +71,11 @@ pub mod entry {
     #[entry_point]
     pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
         Cw721MetadataContract::default().query(deps, env, msg)
+    }
+
+    #[entry_point]
+    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
+        Ok(Response::default())
     }
 }
 
