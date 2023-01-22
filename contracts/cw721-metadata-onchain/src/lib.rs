@@ -1,8 +1,8 @@
 use cosmwasm_schema::cw_serde;
 use cosmwasm_std::Empty;
-use cw721_base::msg::MigrateMsg;
 use cw2::set_contract_version;
 pub use cw721_base::{ContractError, InstantiateMsg, MintMsg, MinterResponse};
+use cw721::{ MigrateMsg};
 
 // Version info for migration
 const CONTRACT_NAME: &str = "crates.io:cw721-metadata-onchain1";
@@ -28,6 +28,7 @@ pub struct Metadata {
     pub background_color: Option<String>,
     pub animation_url: Option<String>,
     pub youtube_url: Option<String>,
+    pub secret_url: Option<String>
 }
 
 pub type Extension = Option<Metadata>;
@@ -58,6 +59,10 @@ pub mod entry {
         Ok(res)
     }
 
+    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
+        Ok(Response::default())
+    }
+
     #[entry_point]
     pub fn execute(
         deps: DepsMut,
@@ -71,11 +76,6 @@ pub mod entry {
     #[entry_point]
     pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
         Cw721MetadataContract::default().query(deps, env, msg)
-    }
-
-    #[entry_point]
-    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
-        Ok(Response::default())
     }
 }
 

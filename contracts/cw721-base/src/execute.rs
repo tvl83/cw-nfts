@@ -4,7 +4,7 @@ use serde::Serialize;
 use cosmwasm_std::{Binary, CustomMsg, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
 
 use cw2::set_contract_version;
-use cw721::{ContractInfoResponse, Cw721Execute, Cw721ReceiveMsg, Expiration};
+use cw721::{ContractInfoResponse, Cw721Execute, Cw721ReceiveMsg, Expiration, MigrateMsg};
 
 use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg, MintMsg};
@@ -37,6 +37,10 @@ where
         self.contract_info.save(deps.storage, &info)?;
         let minter = deps.api.addr_validate(&msg.minter)?;
         self.minter.save(deps.storage, &minter)?;
+        Ok(Response::default())
+    }
+
+    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
         Ok(Response::default())
     }
 
