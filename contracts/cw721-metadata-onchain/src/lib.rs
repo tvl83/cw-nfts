@@ -59,10 +59,6 @@ pub mod entry {
         Ok(res)
     }
 
-    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MigrateMsg) -> StdResult<Response> {
-        Ok(Response::default())
-    }
-
     #[entry_point]
     pub fn execute(
         deps: DepsMut,
