@@ -2,10 +2,9 @@ use cosmwasm_schema::cw_serde;
 use cosmwasm_std::Empty;
 use cw2::set_contract_version;
 pub use cw721_base::{ContractError, InstantiateMsg, MintMsg, MinterResponse};
-use cw721::{ MigrateMsg};
 
 // Version info for migration
-const CONTRACT_NAME: &str = "crates.io:cw721-metadata-onchain1";
+const CONTRACT_NAME: &str = "crates.io:cw721-metadata-onchain";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cw_serde]
